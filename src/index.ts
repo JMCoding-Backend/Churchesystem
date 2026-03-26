@@ -1,17 +1,11 @@
-import express, { Express, Request, Response } from 'express';
-import memberRoutes from './routes/members';
+import memberRoutes from './routes/memberRoutes';
+import donationRoutes from './routes/donationRoutes';
+import websiteRoutes from './routes/websiteRoutes';
 
-const app: Express = express();
-const port = process.env.PORT || 3000;
+const app = require('express')();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use('/api', memberRoutes);
+app.use('/members', memberRoutes);
+app.use('/donations', donationRoutes);
+app.use('/website', websiteRoutes);
 
-app.get('/health', (req: Request, res: Response) => {
-    res.json({ status: 'Church System is running!' });
-});
-
-app.listen(port, () => {
-    console.log(`Church Management System running on port ${port}`);
-});
+export default app;
